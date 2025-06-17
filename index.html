@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Pernikahan Mamat & Duni</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome untuk ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Open Graph (OG) Meta Tags untuk Pratinjau WhatsApp -->
+    <meta property="og:title" content="Undangan Pernikahan Mamat & Duni">
+    <meta property="og:description" content="Dengan hormat, kami mengundang Anda untuk merayakan pernikahan Mamat & Duni.">
+    <meta property="og:image" content="https://undangan.wdsr.xyz/images/og-image.jpg"> <!-- Ganti dengan URL gambar pratinjau Anda -->
+    <meta property="og:url" content="https://undangan.wdsr.xyz"> <!-- Ganti dengan URL dasar undangan Anda -->
+    <meta property="og:type" content="website">
+    <!-- End Open Graph Tags -->
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden; /* Mencegah scrolling sebelum tombol ditekan */
+            scroll-behavior: smooth;
+        }
+        .section {
+            width: 100vw;
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            position: relative;
+            scroll-snap-align: start; /* Untuk efek scroll snap */
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(69, 10, 10, 0.7); /* Dark maroon overlay */
+            z-index: 1;
+        }
+        /* Mengatur agar konten secara default memiliki padding. Max-width akan dikendalikan oleh kelas Tailwind di HTML. */
+        .content {
+            position: relative;
+            z-index: 3; /* Di atas vignette pojok */
+            padding: 1rem;
+            /* Hapus max-width dari sini agar kelas Tailwind di HTML yang mengendalikan */
+        }
+        .font-dancing-script {
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        /* Gaya kustom untuk grid galeri */
+        .gallery-item img {
+            width: 100%;
+            height: 150px; /* Tinggi tetap untuk konsistensi */
+            object-fit: cover;
+            border-radius: 0.75rem;
+        }
+
+        /* Menghapus max-width dari sini karena dikendalikan oleh .content di HTML */
+        .countdown-box {
+            background-color: rgba(69, 10, 10, 0.8); /* Merah marun gelap dengan transparansi */
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            margin: 0 auto;
+        }
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        .countdown-item span:first-child {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        /* Menghapus max-width dari sini karena dikendalikan oleh .content di HTML */
+        .story-gift-box {
+            background-color: rgba(69, 10, 10, 0.8); /* Merah marun gelap dengan transparansi */
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            margin: 0 auto;
+        }
+
+        /* Menghapus max-width dari sini karena dikendalikan oleh .content di HTML */
+        /* max-width untuk wishes-form-box akan dikendalikan langsung di HTML */
+        .wishes-form-box {
+            background-color: rgba(69, 10, 10, 0.8);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            margin: 0 auto;
+        }
+
+        /* Gaya untuk vignette pojok */
+        .corner-vignette {
+            position: absolute;
+            width: 200px; /* Lebar area vignette */
+            height: 200px; /* Tinggi area vignette */
+            z-index: 2; /* Di atas overlay utama, di bawah konten */
+            pointer-events: none; /* Tidak menghalangi interaksi klik */
+        }
+
+        .corner-vignette.top-left {
+            top: 0;
+            left: 0;
+            background: radial-gradient(circle at top left, rgba(0, 0, 0, 0.7) 0%, transparent 70%); /* Lebih gelap */
+        }
+
+        .corner-vignette.top-right {
+            top: 0;
+            right: 0;
+            background: radial-gradient(circle at top right, rgba(0, 0, 0, 0.7) 0%, transparent 70%); /* Lebih gelap */
+        }
+
+        .corner-vignette.bottom-left {
+            bottom: 0;
+            left: 0;
+            background: radial-gradient(circle at bottom left, rgba(0, 0, 0, 0.7) 0%, transparent 70%); /* Lebih gelap */
+        }
+
+        .corner-vignette.bottom-right {
+            bottom: 0;
+            right: 0;
+            background: radial-gradient(circle at bottom right, rgba(0, 0, 0, 0.7) 0%, transparent 70%); /* Lebih gelap */
+        }
+
+        @media (max-width: 767px) {
+            .corner-vignette {
+                width: 150px;
+                height: 150px;
+            }
+        }
+        /* Gaya baru untuk video latar belakang */
+        .background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0; /* Memastikan video berada di belakang semuanya */
+        }
+
+        /* Gaya untuk bottom bar melayang */
+        .bottom-bar {
+            position: fixed;
+            bottom: 1rem; /* Mengangkat bar dari bawah */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%; /* Lebar bar */
+            max-width: 450px; /* Batasi lebar pada desktop */
+            background-color: rgba(69, 10, 10, 0.9); /* Merah marun gelap, sedikit transparan */
+            border-radius: 1.5rem; /* Membuat semua sudut membulat */
+            padding: 0.75rem 1rem;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Menambah bayangan untuk efek melayang */
+            z-index: 1000; /* Pastikan di atas semua elemen */
+            opacity: 0; /* Awalnya tersembunyi */
+            pointer-events: none; /* Tidak bisa diklik saat tersembunyi */
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .bottom-bar-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            font-size: 0.75rem; /* Ukuran teks kecil */
+            font-weight: 500;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .bottom-bar-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .bottom-bar-item i {
+            font-size: 1.5rem; /* Ukuran ikon */
+            margin-bottom: 0.25rem;
+        }
+
+        /* Gaya untuk tombol musik melayang */
+        .music-toggle-btn {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background-color: rgba(69, 10, 10, 0.9); /* Warna latar belakang tombol */
+            color: white;
+            border-radius: 50%; /* Bentuk lingkaran */
+            width: 48px;
+            height: 48px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            z-index: 1001; /* Di atas bottom bar */
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            opacity: 0; /* Awalnya tersembunyi */
+            pointer-events: none; /* Tidak bisa diklik saat tersembunyi */
+        }
+
+        .music-toggle-btn:hover {
+            background-color: rgba(90, 15, 15, 0.9); /* Sedikit lebih gelap saat hover */
+            transform: scale(1.05);
+        }
+
+        /* Custom style for comments display area */
+        .comments-container {
+            max-height: 200px; /* Batasi tinggi untuk scroll */
+            overflow-y: auto; /* Aktifkan scroll vertikal */
+            margin-top: 1.5rem;
+            text-align: left; /* Komentar teks kiri */
+            -webkit-overflow-scrolling: touch; /* Untuk scrolling yang lebih baik di iOS */
+            padding-right: 0.5rem; /* Memberikan sedikit padding agar scrollbar tidak menempel teks */
+            box-sizing: border-box; /* Pastikan padding dihitung dalam total lebar/tinggi */
+        }
+        .comment-item {
+            background-color: rgba(255, 255, 255, 0.05); /* Latar belakang untuk setiap kotak komentar (mirip tweet) */
+            border-radius: 0.75rem; /* Sudut membulat untuk setiap kotak */
+            padding: 1rem; /* Padding di dalam setiap kotak komentar */
+            margin-bottom: 1rem; /* Jarak antara kotak komentar */
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Border tipis untuk memisahkan kotak */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Bayangan untuk efek melayang */
+        }
+        .comment-item:last-child {
+            margin-bottom: 0; /* Hapus margin bawah pada komentar terakhir */
+        }
+        .comment-name {
+            font-weight: 600;
+            color: #ffcc99; /* Warna nama yang lebih terang */
+            margin-bottom: 0.25rem;
+            font-size: 1.1rem; /* Ukuran nama yang sedikit lebih besar */
+        }
+        .comment-message {
+            font-size: 0.95rem; /* Ukuran teks pesan yang sedikit lebih besar */
+            line-height: 1.5;
+            color: #f0f0f0; /* Warna off-white agar mudah dibaca */
+        }
+        /* Style untuk input form agar konsisten */
+        #wishes-form input, #wishes-form textarea {
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.1); /* Latar belakang input transparan */
+            color: white; /* Teks input putih */
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        #wishes-form input:focus, #wishes-form textarea:focus {
+            border-color: #ffcc99; /* Warna border yang lebih terang saat fokus */
+            box-shadow: 0 0 0 2px rgba(255, 204, 204, 0.2);
+        }
+
+        /* Animasi fade-in untuk tampilan awal */
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        /* Hapus gaya modal yang tidak terpakai lagi */
+        /* .greeting-modal-wrapper, .greeting-modal, .greeting-modal-wrapper.show .greeting-modal akan dihapus */
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+
+    <!-- Section 1: Cover Page (Kembali ke struktur asli sebagai halaman sampul) -->
+    <div id="cover-section" class="section fixed inset-0 z-50 transition-opacity duration-1000"
+        style="background-image: url('/images/background.jpeg');">
+        <div class="overlay"></div>
+        <div class="content flex flex-col items-center justify-center max-w-xl mx-auto"
+            style="animation: fadeInScale 1s ease-out forwards;"> <!-- Animasi pada konten cover -->
+            <!-- dear-guest kembali ke posisinya sebelum dipindahkan ke modal -->
+            <p class="text-md md:text-xl mb-4">The Wedding Of</p>
+            <h1 class="text-5xl md:text-7xl font-dancing-script mb-4">Mamat Prihadi <br>&<br>Duni</h1>
+            <p id="dear-guest" class="text-lg md:text-xl mt-4">Dear: Tamu Undangan</p>
+            <button id="open-invitation-btn"
+                class="mt-8 px-8 py-3 bg-red-800 text-white font-semibold rounded-full shadow-lg hover:bg-red-900 transition-all duration-300 transform hover:scale-105">
+                Buka Undangan
+            </button>
+        </div>
+    </div>
+
+    <!-- Main content container - initially hidden by overflow:hidden on body -->
+    <div id="main-content" class="min-h-screen">
+        <!-- Section 2: Couple's Intro -->
+        <section id="couple-intro-section" class="section"
+            style="background-image: url('/images/image1.jpeg');">
+            <div class="overlay"></div>
+            <div class="corner-vignette top-left"></div>
+            <div class="corner-vignette top-right"></div>
+            <div class="corner-vignette bottom-left"></div>
+            <div class="corner-vignette bottom-right"></div>
+            <div class="content flex flex-col items-center max-w-xl mx-auto">
+                <p class="text-md md:text-xl mb-2">The Wedding Of</p>
+                <h2 class="text-5xl md:text-7xl font-dancing-script mb-8">Mamat & Duni</h2>
+                <img src="/images/pertama.jpeg" alt="Couple"
+                    class="rounded-full w-48 h-48 md:w-64 md:h-64 object-cover border-4 border-white shadow-lg mb-8">
+                <p class="text-xl md:text-4xl font-semibold">23 Juni 2025</p>
+            </div>
+        </section>
+
+        <!-- Section 3: Wedding Blessings -->
+        <section class="section">
+            <!-- Latar belakang video -->
+            <video autoplay loop muted playsinline class="background-video">
+                <source src="/vid/back.webm" type="video/webm">
+                Browser Anda tidak mendukung tag video.
+            </video>
+            <div class="overlay"></div>
+            <div class="corner-vignette top-left"></div>
+            <div class="corner-vignette top-right"></div>
+            <div class="corner-vignette bottom-left"></div>
+            <div class="corner-vignette bottom-right"></div>
+            <div class="content text-center max-w-xl mx-auto">
+                <h2 class="text-2xl md:text-5xl font-dancing-script mb-6">Ucapan & Doa Pernikahan</h2>
+                <p class="text-sm md:text-xl leading-relaxed">
+                    "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan-pasangan dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya di antaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang berpikir."
+                </p>
+                <p class="text-sm md:text-md mt-2">- QS. Ar-Rum: 21</p>
+                <p class="text-md md:text-xl mt-6 mb-8">
+                    Semoga Allah senantiasa melimpahkan berkah dan kebahagiaan kepada Mamat Prihadi dan Duni dalam ikatan pernikahan ini. Aamiin.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 4: Bride & Groom Details -->
+        <section id="details-section" class="section"
+            style="background-image: url('/images/section4.jpeg');">
+            <div class="overlay"></div>
+            <div class="corner-vignette top-left"></div>
+            <div class="corner-vignette top-right"></div>
+            <div class="corner-vignette bottom-left"></div>
+            <div class="corner-vignette bottom-right"></div>
+            <div class="content flex flex-col items-center justify-around w-full space-y-6 md:space-y-0 md:space-x-6 max-w-xl mx-auto">
+                <p class="text-sm md:text-lg leading-relaxed mb-4">
+                    Assalamu'alaikum Wr. Wb. <br><br>
+                    Tanpa mengurangi rasa hormat.<br>
+                    Kami mengundang Bapak/Ibu/Saudara/i serta kerabat sekalian untuk menghadiri acara pernikahan kami :
+                </p>
+                <div class="flex flex-col items-center p-4">
+                    <img src="/images/mamat.jpeg" alt="Mamat Prihadi"
+                        class="rounded-full w-36 h-36 md:w-48 md:h-48 object-cover border-4 border-white shadow-md mb-1">
+                    <h3 class="text-3xl font-dancing-script mb-1">Mamat Prihadi</h3>
+                    <p class="text-sm text-center">Putra dari Bapak Wardi & Ibu Jumilah</p>
+                </div>
+                <div class="text-4xl font-dancing-script my-4">&amp;</div>
+                <div class="flex flex-col items-center p-4">
+                    <img src="/images/duni.jpeg" alt="Duni"
+                        class="rounded-full w-36 h-36 md:w-48 md:h-48 object-cover border-4 border-white shadow-md mb-1">
+                    <h3 class="text-3xl font-dancing-script mb-1">Duni</h3>
+                    <p class="text-sm text-center">Putri dari Bapak Karwita & Ibu Jaroh</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Countdown -->
+        <section class="section">
+            <!-- Latar belakang video -->
+            <video autoplay loop muted playsinline class="background-video">
+                <source src="/vid/back.webm" type="video/webm">
+                Browser Anda tidak mendukung tag video.
+            </video>
+            <div class="overlay"></div>
+            <div class="corner-vignette top-left"></div>
+            <div class="corner-vignette top-right"></div>
+            <div class="corner-vignette bottom-left"></div>
+            <div class="corner-vignette bottom-right"></div>
+            <div class="content countdown-box max-w-xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-dancing-script mb-6">Menuju Hari Bahagia</h2>
+                <div id="countdown" class="flex justify-center space-x-4 md:space-x-8">
+                    <div class="countdown-item">
+                        <span id="days">00</span>
+                        <p class="text-sm md:text-lg">Hari</p>
+                    </div>
+                    <div class="countdown-item">
+                        <span id="hours">00</span>
+                        <p class="text-sm md:text-lg">Jam</p>
+                    </div>
+                    <div class="countdown-item">
+                        <span id="minutes">00</span>
+                        <p class="text-sm md:text-lg">Menit</p>
+                    </div>
+                    <div class="countdown-item">
+                        <span id="seconds">00</span>
+                        <p class="text-sm md:text-lg">Detik</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Reception Details -->
+        <section id="reception-section" class="section"
+            style="background-image: url('/images/section6.jpeg');">
+            <div class="overlay"></div>
+            <div class="corner-vignette top-left"></div>
+            <div class="corner-vignette top-right"></div>
+            <div class="corner-vignette bottom-left"></div>
+            <div class="corner-vignette bottom-right"></div>
+            <div class="content max-w-xl mx-auto text-center">
+                <h2 class="text-4xl md:text-5xl font-dancing-script mb-6">Resepsi Pernikahan</h2>
+                <p class="text-md md:text-2xl mb-2">Senin, 23 Juni 2025</p>
+                <p class="text-md md:text-2xl mb-6">Pukul 09:00 - Selesai</p>
+                <p class="text-sm md:text-xl leading-relaxed mb-6">
+                    Kediaman mempelai wanita.<br>
+                    Desa Puntang RT11/RW03 Blok. Sarban Kec. Losarang Kab. Indramayu.
+                </p>
+                <a href="https://maps.google.com/maps?q=-6.4004902%2C108.1624866&z=17&hl=en" target="_blank"
+                    class="inline-block px-8 py-3 bg-red-800 text-white font-semibold rounded-full shadow-lg hover:bg-red-900 transition-all duration-300 transform hover:scale-105">
+                    <i class="fas fa-map-marker-alt mr-2"></i>Lokasi Acara
+                </a>
+                <!-- Preview Map -->
+                <iframe
+                    src="https://maps.google.com/maps?q=-6.4004902%2C108.1624866&z=17&output=embed"
+                    width="100%"
+                    height="250"
+                    frameborder="0"
+                    style="border:0;"
+                    allowfullscreen=""
+                    aria-hidden="false"
+                    tabindex="0"
+                    class="mt-8 rounded-lg shadow-xl">
+                </iframe>
+            </div>
+        </section>
+
+        <!-- Section 7: Gallery -->
+        <section id="gallery-section" class="section h-auto py-16"
+            style="background-image: url('/images/section7.jpg');">
+            <div class="overlay"></div>
+            <div class="corner-vignette top-left"></div>
+            <div class="corner-vignette top-right"></div>
+            <div class="corner-vignette bottom-left"></div>
+            <div class="corner-vignette bottom-right"></div>
+            <div class="content w-full mx-auto max-w-xl">
+                <h2 class="text-4xl md:text-5xl font-dancing-script mb-8">Galeri</h2>
+                <!-- Tata letak galeri yang diperbarui dengan rentang kolom responsif -->
+                <div class="gallery-grid grid grid-cols-2 gap-4"> 
+                    <!-- Foto 1: Akan lebih lebar -->
+                    <div class="gallery-item col-span-2">
+                        <img src="/images/image1.jpeg" alt="Foto 1" class="w-full h-full rounded-lg shadow-md">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="/images/couple.jpeg" alt="Foto 2" class="w-full h-full rounded-lg shadow-md">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="/images/image3.jpeg" alt="Foto 3" class="w-full h-full rounded-lg shadow-md">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="/images/image4.jpeg" alt="Foto 4" class="w-full h-full rounded-lg shadow-md">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="/images/image5.jpeg" alt="Foto 5" class="w-full h-full rounded-lg shadow-md">
+                    </div>
+                    <!-- Foto 6: Akan lebih lebar -->
+                    <div class="gallery-item col-span-2">
+                        <img src="/images/image11.jpg" alt="Foto 6" class="w-full h-full rounded-lg shadow-md">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="/images/image7.jpeg" alt="Foto 7" class="w-full h-full rounded-lg shadow-md">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="/images/image8.jpeg" alt="Foto 8" class="w-full h-full rounded-lg shadow-md">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 8: Love Story -->
+        <section id="love-story-section" class="section">
+            <!-- Latar belakang video untuk Kisah Cinta -->
+            <video autoplay loop muted playsinline class="background-video">
+                <source src="/vid/back.webm" type="video/webm">
+                Browser Anda tidak mendukung tag video.
+            </video>
+            <div class="overlay"></div>
+            <div class="corner-vignette top-left"></div>
+            <div class="corner-vignette top-right"></div>
+            <div class="corner-vignette bottom-left"></div>
+            <div class="corner-vignette bottom-right"></div>
+            <div class="content max-w-xl mx-auto"> 
+                <h2 class="text-3xl md:text-5xl font-dancing-script mb-8">Kisah Cinta Kami</h2>
+
+                <div class="space-y-8 text-center">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">Awal Bertemu</h3>
+                        <p class="text-sm">Kisah kami dimulai pada Januari 2024, di mana takdir mempertemukan kami lewat orang tua yang sudah saya kenal sejak lama. Singkat cerita, kami mencoba memulai hubungan sampai ke titik pelaminan.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">Lamaran</h3>
+                        <p class="text-sm">Pada tanggal 24 April 2024, dengan berbekal keberanian dan cinta, Saya memberanikan diri melamar wanita yang saya cintai di tempat Rumah sang wanita, disaksikan oleh keluarga besar kami. Sebuah janji suci terucap untuk membangun masa depan bersama.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">Pernikahan</h3>
+                        <p class="text-sm">Dan kini, tibalah saatnya kami mengukir sejarah baru. Pada 5 Juli 2024 kami telah bersatu dalam ikatan suci pernikahan, dan sekarang pada tanggal 23 Juni 2025 kami akan mengadakan sebuah acara Resepsi.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 9: Wedding Gift -->
+        <section id="gift-section" class="section h-auto py-16"
+            style="background-image: url('/images/section7.jpg');">
+            <div class="overlay"></div>
+            <div class="corner-vignette top-left"></div>
+            <div class="corner-vignette top-right"></div>
+            <div class="corner-vignette bottom-left"></div>
+            <div class="corner-vignette bottom-right"></div>
+            <div class="content story-gift-box text-center max-w-xl mx-auto">
+                <h2 class="text-3xl md:text-5xl font-dancing-script mb-8">Wedding Gift</h2>
+                <p class="text-sm md:text-xl mb-6">Doa restu dari Anda adalah hadiah terindah bagi kami. Namun, jika Anda berkehendak untuk memberikan tanda kasih, dapat disalurkan melalui:</p>
+
+                <div class="flex flex-col md:flex-row justify-center items-center space-y-8 md:space-y-0 md:space-x-8">
+                    <div class="bg-white bg-opacity-20 p-6 rounded-xl shadow-md w-full md:w-1/2">
+                        <p class="text-md font-semibold mb-2">Transfer Bank</p>
+                        <p class="text-xl font-bold mb-2" id="bank-rek">1340026475375 (Mandiri)</p>
+                        <p class="text-sm mb-4">A.N. Mamat Prihadi</p>
+                        <button onclick="copyToClipboard('bank-rek')"
+                            class="px-6 py-2 bg-red-800 text-white font-semibold rounded-full shadow-lg hover:bg-red-900 transition-all duration-300 transform hover:scale-105">
+                            <i class="fas fa-copy mr-2"></i>Salin Nomor Rekening
+                        </button>
+                    </div>
+                    <div class="bg-white bg-opacity-20 p-6 rounded-xl shadow-md w-full md:w-1/2">
+                        <p class="text-md font-semibold mb-2">QR DANA</p>
+                        <img src="/images/qr.jpeg" alt="QR Code Pembayaran"
+                            class="w-40 h-40 mx-auto rounded-lg mb-2">
+                        <p class="text-sm">Pindai QR untuk Pembayaran Digital</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 10: Wishes & Footer -->
+        <section class="section h-auto py-16"
+            style="background-image: url('/images/image5.jpeg');">
+            <div class="overlay"></div>
+            <div class="corner-vignette top-left"></div>
+            <div class="corner-vignette top-right"></div>
+            <div class="corner-vignette bottom-left"></div>
+            <div class="corner-vignette bottom-right"></div>
+            <div class="content wishes-form-box text-center max-w-2xl mx-auto">
+                <h2 class="text-3xl md:text-5xl font-dancing-script mb-8">Kirim Ucapan & Doa</h2>
+                <form id="wishes-form" class="space-y-4 text-left">
+                    <div>
+                        <label for="name" class="block text-md font-semibold mb-2">Nama Anda:</label>
+                        <input type="text" id="name" name="name" placeholder="Nama lengkap Anda"
+                            class="w-full p-3 rounded-lg bg-white bg-opacity-30 border border-white focus:outline-none focus:ring-2 focus:ring-white text-white placeholder-gray-200" required>
+                    </div>
+                    <div>
+                        <label for="message" class="block text-md font-semibold mb-2">Ucapan & Doa:</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Tulis ucapan dan doa terbaik Anda di sini..."
+                            class="w-full p-3 rounded-lg bg-white bg-opacity-30 border border-white focus:outline-none focus:ring-2 focus:ring-white text-white placeholder-gray-200" required></textarea>
+                    </div>
+                    <button type="submit"
+                        class="w-full py-3 bg-red-800 text-white font-semibold rounded-full shadow-lg hover:bg-red-900 transition-all duration-300 transform hover:scale-105">
+                        Kirim Ucapan
+                    </button>
+                </form>
+
+                <div id="comments-section" class="mt-8">
+                    <div class="border-b border-gray-600 mb-4 pb-4"></div> <!-- Garis pembatas -->
+                    <h3 class="text-2xl font-dancing-script mb-4">Ucapan dari Para Tamu</h3>
+                    <p class="text-lg mb-4">Jumlah Kehadiran: <span id="attendance-count" class="font-bold">0</span></p>
+                    <div id="comments-display" class="comments-container">
+                        <!-- Komentar akan dimuat di sini -->
+                        <p class="text-gray-400">Memuat komentar...</p>
+                    </div>
+                </div>
+            </div>
+            <footer class="absolute bottom-4 left-0 right-0 text-center text-sm md:text-md text-white z-20">
+                Made with ❤ by <span class="font-bold">WDSR</span>
+            </footer>
+        </section>
+    </div>
+
+    <!-- Floating Bottom Bar -->
+    <div id="bottom-bar" class="bottom-bar">
+        <a href="#couple-intro-section" class="bottom-bar-item" data-section="couple-intro-section">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="#details-section" class="bottom-bar-item" data-section="details-section">
+            <i class="fas fa-heart"></i>
+            <span>Love</span>
+        </a>
+        <a href="#reception-section" class="bottom-bar-item" data-section="reception-section">
+            <i class="fas fa-calendar-alt"></i>
+            <span>Date</span>
+        </a>
+        <a href="#gallery-section" class="bottom-bar-item" data-section="gallery-section">
+            <i class="fas fa-images"></i>
+            <span>Galeri</span>
+        </a>
+        <a href="#gift-section" class="bottom-bar-item" data-section="gift-section">
+            <i class="fas fa-gift"></i>
+            <span>Gift</span>
+        </a>
+    </div>
+
+    <!-- Background Music and Toggle Button -->
+    <audio id="background-music" loop muted>
+        <!-- Ganti dengan jalur file musik Anda yang sebenarnya -->
+        <source src="/music.mp3" type="audio/mpeg">
+        Browser Anda tidak mendukung elemen audio.
+    </audio>
+
+    <div id="music-toggle-btn" class="music-toggle-btn">
+        <i class="fas fa-music"></i>
+    </div>
+
+    <script>
+        // URL dasar undangan Anda, sesuai dengan yang ada di dashboard.html
+        const BASE_INVITATION_URL = 'https://undangan.wdsr.xyz'; 
+
+        // Mengatur nama penerima dari parameter URL jika tersedia
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const guestName = urlParams.get('to');
+            let dynamicDescription = "Dengan hormat, kami mengundang Anda untuk merayakan pernikahan Mamat & Duni.";
+
+            // Mengupdate elemen "Dear: Tamu Undangan" di halaman sampul
+            const dearGuestElement = document.getElementById('dear-guest');
+            if (guestName) {
+                dearGuestElement.textContent = `Dear: ${decodeURIComponent(guestName)}`;
+                dynamicDescription = `Undangan pernikahan Mamat & Duni untuk ${decodeURIComponent(guestName)}. Kami mengundang Anda untuk merayakan hari bahagia kami.`;
+            } else {
+                dearGuestElement.textContent = `Dear: Tamu Undangan`;
+            }
+
+            // Update Open Graph Description dynamically
+            const ogDescriptionMeta = document.querySelector('meta[property="og:description"]');
+            if (ogDescriptionMeta) {
+                ogDescriptionMeta.setAttribute('content', dynamicDescription);
+            }
+            // Pastikan og:url juga disetel dengan benar jika URL memiliki parameter
+            const ogUrlMeta = document.querySelector('meta[property="og:url"]');
+            if (ogUrlMeta) {
+                ogUrlMeta.setAttribute('content', window.location.href.split('?')[0]); // Use current URL without parameters
+            }
+
+
+            // Timer Hitung Mundur
+            const countdownDate = new Date('June 23, 2025 00:00:00').getTime();
+
+            const x = setInterval(function() {
+                const now = new Date().getTime();
+                const distance = countdownDate - now;
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById('days').innerHTML = String(days).padStart(2, '0');
+                document.getElementById('hours').innerHTML = String(hours).padStart(2, '0');
+                document.getElementById('minutes').innerHTML = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').innerHTML = String(seconds).padStart(2, '0');
+
+                if (distance < 0) {
+                    clearInterval(x);
+                    document.getElementById('countdown').innerHTML = "<p class='text-2xl'>Pernikahan Telah Dimulai!</p>";
+                }
+            }, 1000);
+
+            // Audio and Music Toggle Logic
+            const backgroundMusic = document.getElementById('background-music');
+            const musicToggleButton = document.getElementById('music-toggle-btn');
+            let isMusicPlaying = false; // Track music state
+
+            // Fungsi tombol "Buka Undangan"
+            document.getElementById('open-invitation-btn').addEventListener('click', function() {
+                const coverSection = document.getElementById('cover-section');
+                const bottomBar = document.getElementById('bottom-bar');
+                
+                // Tampilkan tombol musik
+                musicToggleButton.style.opacity = '1';
+                musicToggleButton.style.pointerEvents = 'auto';
+
+                // Coba putar musik, batalkan mute
+                backgroundMusic.play().then(() => {
+                    backgroundMusic.muted = false;
+                    isMusicPlaying = true;
+                    musicToggleButton.innerHTML = '<i class="fas fa-pause"></i>'; // Ganti ikon menjadi jeda
+                }).catch(error => {
+                    // Autoplay dicegah. Pengguna perlu berinteraksi dengan halaman terlebih dahulu.
+                    console.log('Autoplay dicegah atau gagal:', error);
+                    backgroundMusic.muted = true; // Tetap mute jika autoplay gagal
+                    isMusicPlaying = false;
+                    musicToggleButton.innerHTML = '<i class="fas fa-music"></i>'; // Tetap ikon sebagai musik (mati)
+                });
+
+                coverSection.style.opacity = '0'; // Memudarkan halaman sampul
+                setTimeout(() => {
+                    coverSection.style.display = 'none'; // Menyembunyikan halaman sampul setelah memudar
+                    document.body.style.overflow = 'auto'; // Mengaktifkan pengguliran
+                    bottomBar.style.opacity = '1'; // Menampilkan bottom bar
+                    bottomBar.style.pointerEvents = 'auto'; // Mengaktifkan interaksi klik pada bottom bar
+                }, 1000); // Sesuaikan dengan durasi transisi
+            });
+
+            // Music toggle button click listener
+            musicToggleButton.addEventListener('click', () => {
+                if (isMusicPlaying) {
+                    backgroundMusic.pause();
+                    musicToggleButton.innerHTML = '<i class="fas fa-music"></i>'; // Ganti ikon menjadi musik (mati)
+                } else {
+                    backgroundMusic.play();
+                    musicToggleButton.innerHTML = '<i class="fas fa-pause"></i>'; // Ganti ikon menjadi jeda
+                }
+                isMusicPlaying = !isMusicPlaying; // Toggle state
+            });
+
+            // Fungsionalitas scroll untuk bottom bar
+            document.querySelectorAll('.bottom-bar-item').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault(); // Mencegah perilaku default tautan
+                    const targetId = this.getAttribute('data-section');
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // --- Comment System Logic ---
+            const wishesForm = document.getElementById('wishes-form');
+            const commentsDisplay = document.getElementById('comments-display');
+            const attendanceCountSpan = document.getElementById('attendance-count');
+
+            // Function to fetch and display comments
+            async function fetchComments() {
+                try {
+                    // Ganti 'http://localhost:8080' dengan port yang Anda gunakan (misalnya: 1212)
+                    const response = await fetch('http://localhost:8080/get_comments'); 
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const data = await response.json();
+                    
+                    // Clear previous comments
+                    commentsDisplay.innerHTML = ''; 
+
+                    if (data.comments && data.comments.length > 0) {
+                        data.comments.forEach(comment => {
+                            const commentDiv = document.createElement('div');
+                            commentDiv.classList.add('comment-item');
+                            commentDiv.innerHTML = `
+                                <p class="comment-name">${comment.name}</p>
+                                <p class="comment-message">${comment.message}</p>
+                            `;
+                            commentsDisplay.appendChild(commentDiv);
+                        });
+                        attendanceCountSpan.textContent = data.count;
+                    } else {
+                        commentsDisplay.innerHTML = '<p class="text-gray-400">Belum ada ucapan. Jadilah yang pertama!</p>';
+                        attendanceCountSpan.textContent = '0';
+                    }
+                } catch (error) {
+                    console.error('Error fetching comments:', error);
+                    commentsDisplay.innerHTML = '<p class="text-red-300">Gagal memuat ucapan. Silakan coba lagi nanti.</p>';
+                    attendanceCountSpan.textContent = '-';
+                }
+            }
+
+            // Function to submit comment
+            wishesForm.addEventListener('submit', async (e) => {
+                e.preventDefault(); // Mencegah pengiriman formulir default
+
+                const name = document.getElementById('name').value;
+                const message = document.getElementById('message').value;
+
+                try {
+                    // Ganti 'http://localhost:8080' dengan port yang Anda gunakan (misalnya: 1212)
+                    const response = await fetch('http://localhost:8080/submit_comment', { 
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ name, message })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const result = await response.json();
+                    if (result.status === 'success') {
+                        alert('Ucapan Anda berhasil dikirim!'); // Gunakan modal kustom di aplikasi nyata
+                        wishesForm.reset(); // Kosongkan formulir
+                        fetchComments(); // Muat ulang komentar setelah pengiriman berhasil
+                    } else {
+                        alert('Gagal mengirim ucapan: ' + result.message); // Gunakan modal kustom
+                    }
+                } catch (error) {
+                    console.error('Error submitting comment:', error);
+                    alert('Terjadi kesalahan saat mengirim ucapan. Silakan coba lagi.'); // Gunakan modal kustom
+                }
+            });
+
+            // Load comments when the page loads
+            fetchComments();
+        });
+
+        // Fungsi untuk menyalin teks ke clipboard
+        function copyToClipboard(elementId) {
+            const textToCopy = document.getElementById(elementId).innerText;
+            const tempInput = document.createElement('textarea');
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            alert('Nomor rekening berhasil disalin!'); // Gunakan modal kustom di aplikasi nyata
+        }
+    </script>
+</body>
+</html>
