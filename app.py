@@ -1,5 +1,5 @@
 # Import modul yang diperlukan dari Bottle dan sqlite3
-from bottle import route, run, request, response, static_file, install
+from bottle import route, request, response, static_file, install, default_app
 import sqlite3
 import os
 from datetime import datetime
@@ -117,7 +117,10 @@ def get_comments():
         print(f"Error getting comments: {e}")
         return {'comments': [], 'count': 0, 'message': 'Gagal memuat komentar.'}
 
-# --- Jalankan Aplikasi ---
-# Host '0.0.0.0' agar dapat diakses dari jaringan lokal
-# Port 8080 adalah port default yang sering digunakan. PASTIKAN PORT INI SAMA DENGAN DI index.html
-run(host='0.0.0.0', port=8080, debug=True, reloader=True)
+# --- Ekspor Aplikasi untuk Gunicorn ---
+# Baris ini penting! Ini mengekspor objek aplikasi Bottle.
+# Gunicorn akan mencari objek ini.
+application = default_app()
+
+# Hapus baris `run()` jika Anda akan menggunakan Gunicorn
+# run(host='0.0.0.0', port=8080, debug=True, reloader=True)
